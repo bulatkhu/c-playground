@@ -9,7 +9,7 @@
 // FIFO_List elements;
 
 static int insertElement(int value) {
-	printf("value: %d", value);
+	printf("value: %d\n", value);
 
 	// TODO: implement me!
 	return -1;
@@ -21,7 +21,7 @@ static int removeElement(void) {
 }
 
 
-int filo (int argc, char* argv[]) {
+int main (int argc, char* argv[]) {
 	printf("insert 47: %d\n", insertElement(47)); // 47
 	printf("insert 11: %d\n", insertElement(11)); // 11
 	printf("insert 23: %d\n", insertElement(23)); // 23
