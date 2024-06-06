@@ -1,15 +1,34 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// struct listelement {
-// 	int value;
-// 	struct listelement *next;
-// };
+typedef struct listelement {
+	int value;
+	struct listelement *next;
+} FIFO_List;
 // typedef struct listelement FIFO_List; // optional
-// FIFO_List elements;
+FIFO_List elements;
 
-static int insertElement(int value) {
-	printf("value: %d\n", value);
+static char listToString(FIFO_List const list) {
+	return 'value ' + list.value;
+}
+
+static void printList(FIFO_List const list) {
+	printf("%c\n", listToString(list));
+}
+
+static int insertElement(int const value) {
+	printf("%c | %d \n", listToString(elements), value);
+
+	FIFO_List current = elements;
+
+	printf("boolean %d | \n", current.next != NULL);
+
+	// while (current.value != value) {
+		// if (current.next != NULL) {
+		// 	current = current.next;
+		// }
+	// }
+
 
 	// TODO: implement me!
 	return -1;
