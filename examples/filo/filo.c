@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct listelement {
 	int value;
@@ -8,20 +9,23 @@ typedef struct listelement {
 // typedef struct listelement FIFO_List; // optional
 FIFO_List elements;
 
-static char listToString(FIFO_List const list) {
-	return 'value ' + list.value;
+static char* listToString(FIFO_List const list) {
+	char* result = malloc(50 * sizeof(char));  // Adjust size as needed
+	sprintf(result, "value %d", list.value);
+	return result;
 }
 
 static void printList(FIFO_List const list) {
-	printf("%c\n", listToString(list));
+	printf("%s\n", listToString(list));
 }
 
 static int insertElement(int const value) {
-	printf("%c | %d \n", listToString(elements), value);
+	if (elements.value == 0 && elements.next == NULL) {
+		elements.value = value;
+		return elements.value;
+	}
 
-	FIFO_List current = elements;
-
-	printf("boolean %d | \n", current.next != NULL);
+	// printf("boolean %d | \n", current.next != NULL);
 
 	// while (current.value != value) {
 		// if (current.next != NULL) {
@@ -42,6 +46,9 @@ static int removeElement(void) {
 
 int main (int argc, char* argv[]) {
 	printf("insert 47: %d\n", insertElement(47)); // 47
+
+	printf("%s \n", listToString(elements));
+
 	printf("insert 11: %d\n", insertElement(11)); // 11
 	printf("insert 23: %d\n", insertElement(23)); // 23
 	printf("insert 11: %d\n", insertElement(11)); // -1
