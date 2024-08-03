@@ -7,22 +7,22 @@ typedef struct listelement {
 	struct listelement *next;
 } FIFO_List;
 // typedef struct listelement FIFO_List; // optional
-FIFO_List elements;
+FIFO_List *elements;
 
-static char* listToString(FIFO_List const list) {
+static char* listToString(FIFO_List const *list) {
 	char* result = malloc(50 * sizeof(char));  // Adjust size as needed
-	sprintf(result, "value %d", list.value);
+	sprintf(result, "value %d", list->value);
 	return result;
 }
 
-static void printList(FIFO_List const list) {
+static void printList(FIFO_List const *list) {
 	printf("%s\n", listToString(list));
 }
 
 static int insertElement(int const value) {
-	if (elements.value == 0 && elements.next == NULL) {
-		elements.value = value;
-		return elements.value;
+	if (elements->value == 0 && elements->next == NULL) {
+		elements->value = value;
+		return elements->value;
 	}
 
 	// printf("boolean %d | \n", current.next != NULL);
