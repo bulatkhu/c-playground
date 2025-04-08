@@ -63,11 +63,54 @@ void pointer_syntax() {
     printf("%d\n", a);  // 42
 }
 
+void node_pointer() {
+    typedef struct ListNode {
+        int data;
+        struct ListNode *next;
+    } node_t;
+
+    struct ListNode *list_head;
+
+    node_t node0 = { .data = 42, .next = NULL };
+    node_t node1 = { .data = 1337, .next = &node0 };
+    node_t node2 = { .data = -23, .next = &node1 };
+
+    list_head = &node2;
+
+    printf("head: %d\n", list_head->data);
+    // printf("head: %d\n", (*list_head).data);
+
+
+
+    printf("head->next: %d\n", list_head->next->data);
+
+    const struct ListNode pointerToNode2 = *list_head->next->next;
+    printf("head->next->next: %d\n", pointerToNode2.data); // 42
+
+    printf("short form head->next->next: %d\n", (*(*(*list_head).next).next).data); // 42
+    // -> ist die lesbarere Form von (*var).
+    printf("long form  head->next->next: %d\n", list_head->next->next->data); // 42
+
+
+
+    node_t *currentNode = list_head;
+    int nodeCounter = 0;
+
+    while (currentNode != NULL) {
+        printf("Node: %d | Value: %d\n", nodeCounter, currentNode->data);
+        nodeCounter++;
+        currentNode = currentNode->next;
+    }
+    printf("End\n");
+}
+
 int main(void) {
     // greet_user();
     // basic_syntax();
     // struct_syntax();
-    pointer_syntax();
+    // pointer_syntax();
+
+    node_pointer();
 
     return 0;
 }
