@@ -45,10 +45,29 @@ void struct_syntax() {
     printf("tomorrow day: %d\nyesterday day: %d\n", tomorrow.day, yesterday.day);
 }
 
+void pointer_syntax() {
+    int a = 42;
+    // b zeigt auf a
+    int *b = &a;
+    // lese a (über b)
+    printf("%d\n", *b); // 42
+    // lese a direkt
+    printf("%d\n", a);  // 42
+    // schreibe a (über b)
+    *b = 23;
+    printf("%d\n", *b); // 23
+    printf("%d\n", a);  // 23
+    // schreibe a (direkt)
+    a = 42;
+    printf("%d\n", *b); // 42
+    printf("%d\n", a);  // 42
+}
+
 int main(void) {
     // greet_user();
     // basic_syntax();
-    struct_syntax();
+    // struct_syntax();
+    pointer_syntax();
 
     return 0;
 }
