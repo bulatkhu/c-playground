@@ -104,13 +104,43 @@ void node_pointer() {
     printf("End\n");
 }
 
+void swapByValue(int x, int y) {
+    int tmp = y;
+    y = x;
+    x = tmp;
+}
+
+void swapByRef(int* x, int* y) {
+    int tmp = *y;
+    *y = *x;
+    *x = tmp;
+}
+
+void calls_by_value_vs_by_reference() {
+    int a = 42;
+    int b = 1337;
+
+    printf("swap by value before: a: %d, b: %d\n", a, b); // 42, 1337
+    swapByValue(a, b);
+    printf("swap by value  after: a: %d, b: %d\n", a, b); // 42, 1337
+    printf("------------------------------------\n");
+
+
+
+    printf("swap by reference before: a: %d, b: %d\n", a, b); // 42, 1337
+    swapByRef(&a, &b);
+    printf("swap by reference  after: a: %d, b: %d\n", a, b); // 1337, 42
+
+}
+
 int main(void) {
     // greet_user();
     // basic_syntax();
     // struct_syntax();
     // pointer_syntax();
+    // node_pointer();
 
-    node_pointer();
+    calls_by_value_vs_by_reference();
 
     return 0;
 }
