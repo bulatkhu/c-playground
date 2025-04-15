@@ -133,14 +133,68 @@ void calls_by_value_vs_by_reference() {
 
 }
 
+#include <stdio.h>
+#include <stdbool.h>
+
+void sieve(const int max) {
+    bool prim[max];
+
+    for (int i = 0; i < max; i++) {
+        prim[i] = true;
+        // printf("i=%d: %s\n", i, prim[i] ? "true" : "false");
+    }
+
+    prim[0] = false;
+    prim[1] = false;
+
+    for (int i = 2; i < max; i++) {
+        if (!prim[i]) {
+            continue;
+        }
+
+        for (int j = i * i; j < max; j += i) {
+            if (!prim[j]) {
+                 continue;
+            }
+            prim[j] = false;
+            // printf("j=%d is not prim! i=%d\n", j, i);
+        }
+
+        // for (int j = i + 1; j < max; j++) {
+        //     if (!prim[j]) {
+        //         continue;
+        //     }
+        //
+        //     if (j % i == 0) {
+        //         prim[j] = false;
+        //         // that means, that j is not prim
+        //         printf("j=%d is not prim! i=%d\n", j, i);
+        //     }
+        //     // printf("i=%d: | j=%d %s\n", i, j, prim[i] ? "true" : "false");
+        // }
+    }
+
+    for (int i = 0; i < max; i++) {
+        if (prim[i]) {
+            printf("%d, ", i);
+        }
+    }
+    printf("\n");
+}
+
 int main(void) {
     // greet_user();
     // basic_syntax();
     // struct_syntax();
     // pointer_syntax();
     // node_pointer();
+    // printf("%i: ", MAX)
+    // calls_by_value_vs_by_reference();
 
-    calls_by_value_vs_by_reference();
+    sieve(26); // 2, 3, 5, 7, 11, 13, 17, 19, 23,
+    sieve(3); // 2,
+
+    // TODO: implement sieve here!
 
     return 0;
 }
