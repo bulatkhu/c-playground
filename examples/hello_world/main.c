@@ -157,7 +157,6 @@ void sieve(const int max) {
                  continue;
             }
             prim[j] = false;
-            // printf("j=%d is not prim! i=%d\n", j, i);
         }
 
         // for (int j = i + 1; j < max; j++) {
@@ -176,10 +175,9 @@ void sieve(const int max) {
 
     for (int i = 0; i < max; i++) {
         if (prim[i]) {
-            printf("%d, ", i);
+            printf("%d\n", i);
         }
     }
-    printf("\n");
 }
 
 int main(void) {
@@ -190,10 +188,9 @@ int main(void) {
     // node_pointer();
     // printf("%i: ", MAX)
     // calls_by_value_vs_by_reference();
+    const int MAX = 100;
 
-    sieve(26); // 2, 3, 5, 7, 11, 13, 17, 19, 23,
-    sieve(3); // 2,
-
+    sieve(MAX); // 2, 3, 5, 7, 11, 13, 17, 19, 23,
     // TODO: implement sieve here!
 
     return 0;
