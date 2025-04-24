@@ -2,14 +2,47 @@
 #include <stdlib.h>
 
 // TODO: structs, global variables, etc.
-struct Node {
+typedef struct ListNode {
 	int data;
-	struct Node* next;
-};
+	struct ListNode* next;
+} node_t;
 
-// head Node =
+struct ListNode head = { .data = 0, .next = NULL };
+
+static node_t* findElementByInt(const int value) {
+
+	struct ListNode *currentNode = &head;
+
+	while (currentNode) {
+		printf("Node: %d | Value: %d\n", 1, currentNode->data);
+		if (currentNode->data == value) {
+			return currentNode;
+		}
+		currentNode = currentNode->next;
+	}
+	return NULL;
+}
 
 static int insertElement(int value) {
+	struct ListNode *currentNode = &head;
+
+	while (currentNode) {
+		printf("Node: %d | Value: %d\n", 1, currentNode->data);
+		if (currentNode->data == value) {
+			return -1;
+		}
+
+		if (currentNode->next == NULL) {
+			node_t *newNode = malloc(sizeof(node_t));
+			newNode->data = value;
+			newNode-> next = NULL;
+			currentNode->next = newNode;
+			return value;
+		}
+
+		currentNode = currentNode->next;
+	}
+
 	// TODO: implement me!
 	return -1;
 }
