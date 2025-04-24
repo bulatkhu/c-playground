@@ -7,17 +7,21 @@ typedef struct ListNode {
 	struct ListNode* next;
 } node_t;
 
-struct ListNode head = { .data = 0, .next = NULL };
+struct ListNode head = { .data = 0, .next = NULL }; // ein Dummy Knoten mit 0 iniziert, das ignorieren wir einfach
 
 void printListNode() {
 	struct ListNode *currentNode = &head;
+	currentNode = currentNode->next; // ich skippe den Dummy Knoten mit dem Wert 0
+
 	int nodeCounter = 0;
 
+	printf("Nodes: ");
 	while (currentNode) {
-		printf("Node: %d | Value: %d\n", nodeCounter, currentNode->data);
+		printf("%d,", currentNode->data);
 		currentNode = currentNode->next;
 		nodeCounter++;
 	}
+	printf("\n----------------------\n");
 }
 
 static int insertElement(int value) {
@@ -83,29 +87,26 @@ int main (int argc, char* argv[]) {
 	printListNode();
 
 
-	printf("______________________\n");
-	printListNode();
-	printf("remove: %d\n", removeElement());
-	printListNode();
-	printf("______________________\n");
-	printListNode();
-	printf("remove: %d\n", removeElement());
-	printListNode();
-	printf("______________________\n");
-	printListNode();
-	printf("remove: %d\n", removeElement());
-	printListNode();
-	printf("______________________\n");
-	printListNode();
-	printf("remove: %d\n", removeElement());
-	printListNode();
-	printf("______________________\n");
-	printListNode();
 	printf("remove: %d\n", removeElement());
 	printListNode();
 
+	printf("remove: %d\n", removeElement());
+	printListNode();
 
-	// TODO: add more tests
+	printf("remove: %d\n", removeElement());
+	printListNode();
+
+	printf("remove: %d\n", removeElement());
+	printListNode();
+
+	printf("remove: %d\n", removeElement());
+	printListNode();
+
+	printf("insert 9: %d\n", insertElement(9));
+	printListNode();
+
+	printf("remove: %d\n", removeElement());
+	printListNode();
 
 	exit(EXIT_SUCCESS);
 }
