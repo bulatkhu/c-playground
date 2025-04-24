@@ -23,7 +23,11 @@ void printListNode() {
 	printf("\n----------------------\n");
 }
 
-static int insertElement(int value) {
+static int insertElement(const int value) {
+	if (value < 0) { // falls ein negativer Wert eingefügt wird
+		return -1;
+	}
+
 	struct ListNode *currentNode = &head;
 
 	while (currentNode) {
@@ -34,6 +38,11 @@ static int insertElement(int value) {
 
 		if (currentNode->next == NULL) {
 			node_t *newNode = malloc(sizeof(node_t));
+
+			if (newNode == NULL) { // Falls die Memory allocation fehlgeschlagen hat, -1 zurückgeben
+				return -1;
+			}
+
 			newNode->data = value;
 			newNode-> next = NULL;
 			currentNode->next = newNode;
@@ -43,7 +52,6 @@ static int insertElement(int value) {
 		currentNode = currentNode->next;
 	}
 
-	// TODO: implement me!
 	return -1;
 }
 
@@ -62,26 +70,28 @@ static int removeElement(void) {
 }
 
 int main (int argc, char* argv[]) {
-	printf("insert 47: %d\n", insertElement(47));
+	printf("insert -500: %d\n", insertElement(-500)); // -1
+
+	printf("insert 47: %d\n", insertElement(47)); // 47
 	// printListNode();
-	printf("insert 11: %d\n", insertElement(11));
+	printf("insert 11: %d\n", insertElement(11)); // 11
 	// printListNode();
-	printf("insert 23: %d\n", insertElement(23));
+	printf("insert 23: %d\n", insertElement(23)); // 23
 	// printListNode();
-	printf("insert 11: %d\n", insertElement(11));
+	printf("insert 11: %d\n", insertElement(11)); // -1
 	// printListNode();
 
 
-	printf("remove: %d\n", removeElement());
+	printf("remove: %d\n", removeElement()); // 47
 	// printListNode();
 
-	printf("remove: %d\n", removeElement());
+	printf("remove: %d\n", removeElement()); // 11
 	// printListNode();
 
-	// printf("remove: %d\n", removeElement());
+	printf("remove: %d\n", removeElement()); // 23
 	// printListNode();
 	//
-	// printf("remove: %d\n", removeElement());
+	printf("remove: %d\n", removeElement()); // -1
 	// printListNode();
 	//
 	// printf("remove: %d\n", removeElement());
