@@ -9,3 +9,4 @@ add_executable(pointers examples/pointers.c)
 add_executable(sieve examples/sieve.c)
 add_executable(lilo examples/lilo.c
         examples/lilo.c)
+add_executable(rsort examples/rsort.c)
