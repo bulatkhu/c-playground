@@ -12,3 +12,5 @@ add_executable(lilo examples/lilo.c
 add_executable(rsort examples/rsort.c)
 add_executable(clash_plist examples/clash/plist.c
         examples/clash/plist.c)
+add_executable(halde examples/halde/halde.c
+        examples/halde/test.c)
