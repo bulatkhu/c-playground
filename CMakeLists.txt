@@ -10,3 +10,5 @@ add_executable(sieve examples/sieve.c)
 add_executable(lilo examples/lilo.c
         examples/lilo.c)
 add_executable(rsort examples/rsort.c)
+add_executable(clash_plist examples/clash/plist.c
+        examples/clash/plist.c)
