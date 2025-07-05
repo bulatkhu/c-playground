@@ -8,6 +8,9 @@ int main(int argc, char *argv[]) {
 	printList();
 
 	char *m1 = malloc(200*1024);
+
+	printf("m1 \n");
+
 	printList();
 
 	free(m1);

@@ -23,10 +23,13 @@ struct mblock {
 static char memory[SIZE];
 
 /// Pointer to the first element of the free-memory list.
-static struct mblock *head;
+static struct mblock *head = NULL;
 
 /// Helper function to visualise the current state of the free-memory list.
 void printList(void) {
+
+	// printf("printList	/n");
+
 	struct mblock *lauf = head;
 
 	// Empty list
@@ -56,20 +59,56 @@ void printList(void) {
 }
 
 void *malloc (size_t size) {
-	// TODO: implement me!
-	return NULL;
-}
 
-void free (void *ptr) {
-	// TODO: implement me!
-}
+	if (size == 0) return NULL;
 
-void *realloc (void *ptr, size_t size) {
-	// TODO: implement me!
-	return NULL;
-}
+	struct mblock *prev = NULL, *cur = head;
+	while(cur && cur->size < size) {
+		prev = cur;
+		cur = cur->next;
+	}
 
-void *calloc (size_t nmemb, size_t size) {
-	// TODO: implement me!
-	return NULL;
+	printf("Hello from malloc! %zu\n", size);
+
+	if (!cur) {
+		errno = ENOMEM;
+		return NULL;
+	}
+
+	if (cur->size >= size + sizeof(struct mblock) + 1) {
+		struct mblock *newblock = (struct mblock*)cur->memory + size;
+		newblock->size = cur->size - size - sizeof(struct mblock);
+		newblock->next = cur->next;
+
+		cur->size = size;
+
+		if (prev)
+			prev->next = newblock;
+		else
+			head = newblock;
+	} else {
+		if (prev)
+			prev->next = cur->next;
+		else
+			head = cur->next;
+	}
+
+	cur->next = (struct mblock*)MAGIC;
+	// printf("Cur -> size! %d", cur->size);
+
+	return cur->memory;
 }
+//
+// void free (void *ptr) {
+// 	// TODO: implement me!
+// }
+//
+// void *realloc (void *ptr, size_t size) {
+// 	// TODO: implement me!
+// 	return NULL;
+// }
+//
+// void *calloc (size_t nmemb, size_t size) {
+// 	// TODO: implement me!
+// 	return NULL;
+// }
