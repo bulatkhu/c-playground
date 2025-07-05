@@ -15,3 +15,6 @@ add_executable(clash_plist examples/clash/plist.c
 add_executable(halde examples/halde/halde.c)
 add_executable(halde_test examples/halde/test.c
         examples/halde/halde.c)
+add_executable(patric examples/patric/triangle.c)
+add_executable(patric1 examples/patric/patric.c
+        examples/patric/patric.c)
