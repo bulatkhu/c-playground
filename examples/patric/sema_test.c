@@ -1,0 +1,49 @@
+#define _XOPEN_SOURCE 700
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+#include <semaphore.h>
+#include <unistd.h>
+// #include "sem.h"
+
+#define THREAD_NUM 16
+
+sem_t semaphore;
+
+void routine(void* args) {
+    int queue_num = *(int*) args;
+    printf("(%d) Waits in the login queue\n", queue_num);
+    sem_wait(&semaphore);
+    printf("(%d) Logged in\n", queue_num);
+    sleep(1);
+    printf("Hello from thread %d\n", queue_num);
+    printf("(%d) Logged out\n", queue_num);
+
+    sem_post(&semaphore);
+    free(args);
+}
+
+int main() {
+    pthread_t th[THREAD_NUM];
+    sem_init(&semaphore, 0, 32);
+
+    int i;
+
+    for (i = 0; i < THREAD_NUM; i++) {
+        int* a = malloc(sizeof(THREAD_NUM));
+        *a = i;
+
+        if (pthread_create(&th[i], NULL, (void *) &routine, a) != 0) {
+            perror("Failed to create thread");
+        }
+    }
+
+    for (i = 0; i < THREAD_NUM; i++) {
+        if (pthread_join(th[i], NULL) != 0) {
+            perror("Failed to join thread");
+        }
+    }
+    sem_destroy(&semaphore);
+    return 0;
+}
+
