@@ -26,20 +26,20 @@ static void *routine(void *args) {
 
 int main() {
 
-    int num;
-    char some_char;
-    printf("Enter any int : \n");
-    scanf("%d", &num);
-
-
-    printf("Enter any char : \n");
-    fflush(stdin); // is use to clean up the stdin to use the stdin later
-    scanf("%c", &some_char);
-
-    printf("You typed int:  %d \n", num);
-    printf("You typed char: %c \n", some_char);
-
-    return 0;
+    // int num;
+    // char some_char;
+    // printf("Enter any int : \n");
+    // scanf("%d", &num);
+    //
+    //
+    // printf("Enter any char : \n");
+    // fflush(stdin); // is use to clean up the stdin to use the stdin later
+    // scanf("%c", &some_char);
+    //
+    // printf("You typed int:  %d \n", num);
+    // printf("You typed char: %c \n", some_char);
+    //
+    // return 0;
     pthread_t th[THREAD_NUM];
     sem_init(&semaphore, 0, 2);
 
