@@ -10,22 +10,23 @@
 
 sem_t semaphore;
 
-void routine(void* args) {
+static void *routine(void *args) {
     int queue_num = *(int*) args;
     printf("(%d) Waits in the login queue\n", queue_num);
     sem_wait(&semaphore);
     printf("(%d) Logged in\n", queue_num);
-    sleep(1);
     printf("Hello from thread %d\n", queue_num);
+    sleep(rand() % 5 + 1);
     printf("(%d) Logged out\n", queue_num);
 
     sem_post(&semaphore);
     free(args);
+    return NULL;
 }
 
 int main() {
     pthread_t th[THREAD_NUM];
-    sem_init(&semaphore, 0, 32);
+    sem_init(&semaphore, 0, 2);
 
     int i;
 
@@ -33,7 +34,7 @@ int main() {
         int* a = malloc(sizeof(THREAD_NUM));
         *a = i;
 
-        if (pthread_create(&th[i], NULL, (void *) &routine, a) != 0) {
+        if (pthread_create(&th[i], NULL, routine, a) != 0) {
             perror("Failed to create thread");
         }
     }
@@ -42,6 +43,7 @@ int main() {
         if (pthread_join(th[i], NULL) != 0) {
             perror("Failed to join thread");
         }
+        // pthread_detach(th[i]);
     }
     sem_destroy(&semaphore);
     return 0;
