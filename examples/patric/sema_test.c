@@ -37,15 +37,19 @@ int main() {
         if (pthread_create(&th[i], NULL, routine, a) != 0) {
             perror("Failed to create thread");
         }
+        pthread_detach(th[i]);
     }
 
-    for (i = 0; i < THREAD_NUM; i++) {
-        if (pthread_join(th[i], NULL) != 0) {
-            perror("Failed to join thread");
-        }
-        // pthread_detach(th[i]);
-    }
+    // with pthread_join will wait till all threads are ready and will give back the result
+    // for (i = 0; i < THREAD_NUM; i++) {
+    //     if (pthread_join(th[i], NULL) != 0) {
+    //         perror("Failed to join thread");
+    //     }
+    // }
     sem_destroy(&semaphore);
+
+    printf("end");
+    sleep(10);
     return 0;
 }
 
