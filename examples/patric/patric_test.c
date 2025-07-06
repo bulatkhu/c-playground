@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include "sem.h"
-#include "triangle.c"
+#include "triangle.h"
 
 struct Counter {
     int boundry;
@@ -21,10 +21,10 @@ void *callback(int boundry, int interior) {
     myCounter.boundry += boundry;
     myCounter.interior += interior;
     return NULL;
-};
+}
 
 static void *routine(void *args) {
-    struct triangle tr = *(struct triangle*) args;
+    // struct triangle tr = *(struct triangle*) args;
     V(sem);
     printf("tr\n");
     P(sem);
