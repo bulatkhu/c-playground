@@ -19,3 +19,4 @@ add_executable(patric examples/patric/triangle.c)
 add_executable(patric1 examples/patric/patric.c
         examples/patric/patric.c)
 add_executable(sema_test examples/patric/sema_test.c)
+add_executable(patric_test examples/patric/patric_test.c)
